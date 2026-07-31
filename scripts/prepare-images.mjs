@@ -25,14 +25,20 @@ const gradeDark = (img) =>
 const crops = {
   // На исходнике Chery справа стоят люди — оставляем левые 76%.
   "arr1.jpg": { left: 0, widthRatio: 0.76 },
+  // У Passat слева в кадре чужие машины — сдвигаем кадр вправо.
+  "pas_b8.jpg": { left: 0.12, widthRatio: 0.88 },
 };
 
+/**
+ * Поколения подобраны под годы парка: Passat 2016 — это B8 (не B7),
+ * Solaris 2018 — второе поколение HC (не рестайлинг 2020+).
+ */
 const cards = [
   { src: "arr1.jpg", out: "arrizo.webp" },
   { src: "opt1.jpg", out: "optima.webp" },
   { src: "jol1.jpg", out: "jolion.webp" },
-  { src: "pas1.jpg", out: "passat.webp" },
-  { src: "sol2.jpg", out: "solaris.webp" },
+  { src: "pas_b8.jpg", out: "passat.webp" },
+  { src: "sol_hc.jpg", out: "solaris.webp" },
 ];
 
 const jobs = [
@@ -49,7 +55,7 @@ const jobs = [
   })),
 
   // Полосы главной
-  { src: "pas1.jpg", out: "hero.webp", w: 2400, h: 1350, dark: true },
+  { src: "pas_b8.jpg", out: "hero.webp", w: 2400, h: 1350, dark: true },
   { src: "interior.jpg", out: "interior.webp", w: 1800, h: 1200, dark: true },
   { src: "krsk2s.jpg", out: "krasnoyarsk.webp", w: 1800, h: 1013, dark: true },
 ];
@@ -59,7 +65,7 @@ await mkdir(OUT, { recursive: true });
 for (const job of jobs) {
   let pipeline = sharp(path.join(RAW, job.src));
 
-  const crop = crops[job.src];
+  const crop = job.crop ?? crops[job.src];
   if (crop) {
     const { width, height } = await pipeline.metadata();
     pipeline = pipeline.extract({

@@ -23,6 +23,9 @@ export function Hero() {
         className="object-cover"
       />
       <div className="scrim absolute inset-0" />
+      {/* Гасим верхний левый угол: в кадре осталась чужая красная машина,
+          а красный на этой странице принадлежит только CTA и цене. */}
+      <div className="absolute inset-0 bg-[radial-gradient(90%_70%_at_0%_0%,rgba(10,10,10,0.95),rgba(10,10,10,0)_60%)]" />
 
       <div className="relative mx-auto w-full max-w-[1200px] px-5 pb-14 pt-28 lg:px-8 lg:pb-20">
         <p className="eyebrow eyebrow-photo">Красноярск · круглосуточно</p>

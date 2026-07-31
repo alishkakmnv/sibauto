@@ -86,9 +86,9 @@ export function Footer() {
           Информация на сайте не является публичной офертой.
         </p>
         <p className="mt-2 max-w-[92ch] text-[12px] leading-relaxed text-fg-subtle/80">
-          Фото: Wikimedia Commons — gleb, SsmIntrigue, Thomas Doerfer, Nord794ub,
-          Jengtingchen, Vyacheslav Argenberg (CC BY 3.0 / CC BY 4.0 / CC BY-SA 4.0);
-          rawpixel (CC0). Изображения кадрированы и обработаны.
+          Фото: Wikimedia Commons — Thomas Doerfer, Milhouse35, SsmIntrigue,
+          Nord794ub, Jengtingchen, Vyacheslav Argenberg (CC BY-SA 3.0 / CC BY 4.0 /
+          CC BY-SA 4.0); rawpixel (CC0). Изображения кадрированы и обработаны.
         </p>
       </div>
     </footer>

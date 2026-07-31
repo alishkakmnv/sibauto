@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node --test scripts/check-pricing.ts",
+    "typecheck:scripts": "tsc -p scripts/tsconfig.json --noEmit",
+    "images": "node scripts/prepare-images.mjs",
+    "shots": "node scripts/shots.mjs"
   },
   "dependencies": {
     "motion": "^12.43.0",

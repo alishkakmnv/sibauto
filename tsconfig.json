@@ -30,5 +30,6 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  "comment": "scripts/ запускаются node напрямую (стриппинг типов) и импортируют с расширением .ts — под правила сборки Next они не подпадают, у них свой tsconfig",
+  "exclude": ["node_modules", "scripts"]
 }
