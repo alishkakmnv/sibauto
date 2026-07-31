@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+/* ── Токены из DESIGN.md ─────────────────────────────────────────────────
+   Чёрно-белая база, единственный акцент — красный. Никаких градиентов.   */
+@theme {
+  --color-bg: #0a0a0a;
+  --color-bg-elevated: #141414;
+  --color-surface: #1c1c1c;
+  --color-fg: #ffffff;
+  --color-fg-muted: #a1a1a1;
+  --color-fg-subtle: #6b6b6b;
+  --color-line: #2a2a2a;
+  --color-accent: #e31937;
+  --color-accent-hover: #c4152f;
+  --color-band: #f5f5f5;
+  --color-band-fg: #0a0a0a;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-quint: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-bg);
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Заголовки — плотный трекинг, как у Tesla */
+  h1,
+  h2,
+  h3 {
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-fg);
+    outline-offset: 3px;
+  }
+
+  /* Тёмный UI календаря в date-инпутах */
+  input[type="date"] {
+    color-scheme: dark;
+  }
+}
+
+@layer utilities {
+  /* Мелкий uppercase-лейбл (eyebrow) */
+  .eyebrow {
+    font-size: 0.6875rem;
+    line-height: 1;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-fg-subtle);
+  }
+
+  /* Тот же лейбл, но поверх фото — на тёмной фотографии #6B6B6B не читается */
+  .eyebrow-photo {
+    color: rgb(255 255 255 / 0.7);
+  }
+
+  /* Затемнение под текстом поверх фото */
+  .scrim {
+    background: linear-gradient(
+      to top,
+      rgb(10 10 10 / 0.92) 0%,
+      rgb(10 10 10 / 0.7) 35%,
+      rgb(10 10 10 / 0.25) 70%,
+      rgb(10 10 10 / 0.35) 100%
+    );
+  }
+
+  .scrim-soft {
+    background: linear-gradient(
+      to top,
+      rgb(10 10 10 / 0.95) 0%,
+      rgb(10 10 10 / 0.55) 45%,
+      rgb(10 10 10 / 0.2) 100%
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
