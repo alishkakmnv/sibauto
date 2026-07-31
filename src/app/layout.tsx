@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { BookingProvider } from "@/components/booking/BookingProvider";
 import { Footer } from "@/components/layout/Footer";
 import { Nav } from "@/components/layout/Nav";
+import { allowIndexing } from "@/lib/seo";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -14,6 +15,15 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
+  // Демо закрыто от поиска, пока Денис не согласовал публикацию. См. lib/seo.ts
+  robots: allowIndexing
+    ? { index: true, follow: true }
+    : {
+        index: false,
+        follow: false,
+        nocache: true,
+        googleBot: { index: false, follow: false, noimageindex: true },
+      },
   title: {
     default: `${site.name} — аренда авто в Красноярске от 2 200 ₽/сутки`,
     template: `%s — ${site.name}`,

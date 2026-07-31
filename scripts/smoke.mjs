@@ -52,6 +52,27 @@ for (const route of routes) {
   );
 }
 
+// 1.1 Демо закрыто от индексации: заголовок, мета-тег и читаемый robots.txt
+{
+  const response = await page.goto(BASE + "/", { waitUntil: "networkidle" });
+  const header = response?.headers()["x-robots-tag"] ?? "";
+  check("заголовок X-Robots-Tag: noindex", header.includes("noindex"), header || "нет заголовка");
+
+  const meta = await page
+    .locator('meta[name="robots"]')
+    .first()
+    .getAttribute("content");
+  check("мета-тег robots: noindex", Boolean(meta?.includes("noindex")), meta ?? "нет тега");
+
+  const robots = await page.goto(BASE + "/robots.txt");
+  const body = (await robots?.text()) ?? "";
+  check(
+    "robots.txt не запрещает обход (иначе noindex не прочитают)",
+    !/Disallow:\s*\/\s*$/m.test(body),
+    body.replace(/\n/g, " ").trim(),
+  );
+}
+
 // 2. 404 отдаёт статус 404, а не 200
 const missing = await page.goto(BASE + expected404, { waitUntil: "networkidle" });
 check("несуществующая машина → 404", missing?.status() === 404, String(missing?.status()));
